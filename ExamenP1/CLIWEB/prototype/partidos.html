@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partidos — TicketPremium (Wireframe)</title>
+<style>
+:root {
+  --grad-start: #0f4c5c; --grad-end: #1a759f; --accent: #00b4d8;
+  --bg: #0d1b2a; --surface: #1b2838; --surface2: #243447;
+  --fg: #e0e6ed; --muted: #8899aa; --border: #2d3f50;
+  --radius: 12px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  background-image:
+    linear-gradient(180deg, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.85) 100%),
+    url('../wwwroot/images/f54dc119-3371-4f3d-8f11-006445168f44.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+/* Navbar */
+.navbar {
+  background: rgba(11,22,40,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-brand { font-weight: 700; font-size: 1.05rem; color: var(--fg); text-decoration: none; display:flex; align-items:center; gap:8px; }
+.navbar-brand span { font-size: 1.2rem; }
+.navbar-links { display: flex; align-items: center; gap: 16px; }
+.navbar-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; padding: 6px 12px; border-radius: 6px; transition: all 0.15s; }
+.navbar-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
+.navbar-user { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+.navbar-user .user-name { color: var(--muted); }
+.navbar-user .btn-logout { background: none; border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.navbar-user .btn-logout:hover { border-color: var(--muted); color: var(--fg); }
+
+/* Content */
+.content { max-width: 1200px; margin: 0 auto; padding: 24px 20px 40px; }
+/* Header card */
+.page-header {
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.page-header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+.page-header p { opacity: 0.8; font-size: 0.9rem; margin-top: 4px; }
+.page-header .btn-outline {
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: #fff;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+.page-header .btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+.match-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.match-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+.match-teams {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.team { flex: 1; font-size: 1.1rem; font-weight: 700; }
+.team:first-child { text-align: right; }
+.vs-badge {
+  background: var(--surface2);
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.match-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.match-info strong { color: var(--fg); font-weight: 500; display: block; margin-bottom: 2px; }
+.btn-action {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.15s;
+}
+.btn-action:hover { filter: brightness(1.12); }
+
+.wf-note { text-align: center; margin-top: 32px; }
+.wf-badge {
+  display: inline-block; padding: 4px 10px;
+  border: 1px dashed var(--border); border-radius: 4px;
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-left: 2px;
+}
+
+/* Wireframe annotation */
+.wf-annotation {
+  display: inline-block;
+  background: rgba(0,180,216,0.1);
+  border: 1px dashed rgba(0,180,216,0.3);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="partidos.html"><span>&#9917;</span> TicketPremium</a>
+  <div class="navbar-links">
+    <a href="partidos.html" class="active">Partidos</a>
+  </div>
+  <div class="navbar-user">
+    <span class="user-name">admin</span>
+    <button class="btn-logout" onclick="location.href='login.html'">Cerrar sesión</button>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="page-header">
+    <div>
+      <h1>Partidos disponibles</h1>
+      <p>Encuentra los mejores partidos y compra tus boletos</p>
+    </div>
+    <a href="resumen.html" class="btn-outline">Resumen de ventas →</a>
+  </div>
+
+  <!-- [WF] Loading state: spinner con "Cargando partidos..."
+       [WF] Error state: alert rojo con mensaje de error de conexión
+       [WF] Empty state: alert con "No hay partidos disponibles" -->
+
+  <div class="section-label">6 partidos encontrados</div>
+  <div class="grid">
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">Barcelona SC</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">Emelec</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 25/05/2026 19:00</div>
+        <div><strong>Estadio</strong> Monumental</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">LDU Quito</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">El Nacional</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 26/05/2026 20:00</div>
+        <div><strong>Estadio</strong> Rodrigo Paz</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">Independiente</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">Aucas</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 28/05/2026 16:00</div>
+        <div><strong>Estadio</strong> Banco Guayaquil</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">D. Cuenca</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">Macará</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 30/05/2026 15:00</div>
+        <div><strong>Estadio</strong> A. Serrano Aguilar</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">U. Católica</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">Mushuc Runa</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 01/06/2026 19:30</div>
+        <div><strong>Estadio</strong> Olímpico Atahualpa</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="team">Orense</div>
+        <div class="vs-badge">VS</div>
+        <div class="team">T. Universitario</div>
+      </div>
+      <div class="match-info">
+        <div><strong>Fecha</strong> 03/06/2026 14:00</div>
+        <div><strong>Estadio</strong> 9 de Mayo</div>
+      </div>
+      <a href="localidades.html" class="btn-action">Ver localidades →</a>
+    </div>
+  </div>
+
+  <div class="wf-note">
+    <span class="wf-badge">Wireframe — Partidos</span><br>
+    <span style="color:var(--muted);font-size:0.72rem;">Ruta: /partidos · Layout: MainLayout · 3 cols (lg) / 2 cols (md) / 1 col (sm)</span>
+  </div>
+</main>
+</body>
+</html>

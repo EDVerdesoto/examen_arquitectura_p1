@@ -1,0 +1,60 @@
+﻿@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject AuthState AuthState
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<nav class="navbar navbar-expand-lg navbar-dark topbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="partidos">
+            <i class="bi bi-ticket-perforated-fill"></i> TicketPremium
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="partidos" Match="NavLinkMatch.All">
+                        <i class="bi bi-calendar-event-fill"></i> Partidos
+                    </NavLink>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                @if (AuthState.IsAuthenticated)
+                {
+                    <li class="nav-item px-lg-2">
+                        <span class="nav-link text-light user-name">
+                            <i class="bi bi-person-circle"></i> @AuthState.NombreUsuario
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm logout-btn" @onclick="Logout">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                        </button>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@code {
+    protected override void OnInitialized()
+    {
+        AuthState.OnChange += StateHasChanged;
+    }
+
+    private void Logout()
+    {
+        AuthState.Logout();
+        Navigation.NavigateTo("/login", forceLoad: false);
+    }
+
+    public void Dispose()
+    {
+        AuthState.OnChange -= StateHasChanged;
+    }
+}

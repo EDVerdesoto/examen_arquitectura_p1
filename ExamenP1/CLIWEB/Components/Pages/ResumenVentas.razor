@@ -1,0 +1,143 @@
+@page "/resumen-ventas/{CodigoPartido:int}"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<PageTitle>Resumen de Ventas - TicketPremium</PageTitle>
+
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/partidos">Partidos</a></li>
+        <li class="breadcrumb-item active">Resumen de ventas</li>
+    </ol>
+</nav>
+
+<h2 class="mb-4">
+    <i class="bi bi-bar-chart-fill"></i> Resumen de ventas
+</h2>
+
+@if (isLoading)
+{
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2 text-muted">Cargando resumen...</p>
+    </div>
+}
+else if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (resumen != null)
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <span class="text-muted">Partido:</span>
+                    <strong>@resumen.Partido</strong>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <span class="text-muted">Fecha:</span>
+                    <strong>@resumen.Fecha.ToString("dd/MM/yyyy HH:mm")</strong>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <span class="text-muted">Código:</span>
+                    <strong>#@CodigoPartido</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (resumen.Detalles.Length == 0)
+    {
+        <div class="alert alert-info">Aún no se han registrado ventas para este partido.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Localidad</th>
+                        <th class="text-end">Boletos vendidos</th>
+                        <th class="text-end">Total recaudado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var detalle in resumen.Detalles)
+                    {
+                        <tr>
+                            <td>
+                                <i class="bi bi-geo-alt-fill text-primary"></i> @detalle.Localidad
+                            </td>
+                            <td class="text-end">
+                                <span class="badge bg-primary fs-6">@detalle.Vendidos</span>
+                            </td>
+                            <td class="text-end fw-bold">$@detalle.TotalRecaudado.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <td><strong>TOTALES</strong></td>
+                        <td class="text-end">
+                            <strong>@resumen.Detalles.Sum(d => d.Vendidos)</strong>
+                        </td>
+                        <td class="text-end">
+                            <strong class="text-success fs-5">$@resumen.Detalles.Sum(d => d.TotalRecaudado).ToString("N2")</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+}
+
+<div class="mt-4">
+    <a href="/partido/@CodigoPartido/localidades" class="btn btn-outline-primary me-2">
+        <i class="bi bi-pin-map"></i> Ver localidades
+    </a>
+    <a href="/partidos" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Volver a partidos
+    </a>
+</div>
+
+@code {
+    [Parameter] public int CodigoPartido { get; set; }
+
+    [Inject] private TicketService TicketService { get; set; } = default!;
+    [Inject] private AuthState AuthState { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+
+    private ResumenVentaDTO? resumen;
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override void OnInitialized()
+    {
+        if (!AuthState.IsAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            resumen = await TicketService.ObtenerResumenVentasAsync(CodigoPartido);
+        }
+        catch (Exception)
+        {
+            errorMessage = "No se pudo cargar el resumen de ventas. Verifique la conexión.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

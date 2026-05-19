@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Localidades — TicketPremium (Wireframe)</title>
+<style>
+:root {
+  --grad-start: #0f4c5c; --grad-end: #1a759f; --accent: #00b4d8;
+  --bg: #0d1b2a; --surface: #1b2838; --surface2: #243447;
+  --fg: #e0e6ed; --muted: #8899aa; --border: #2d3f50;
+  --success: #3fb950; --danger: #e5534b;
+  --radius: 12px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--fg); min-height: 100vh;
+  background-image: linear-gradient(180deg, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.85) 100%), url('../wwwroot/images/f54dc119-3371-4f3d-8f11-006445168f44.jpg');
+  background-size: cover; background-position: center; background-attachment: fixed; }
+.navbar {
+  background: rgba(11,22,40,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+}
+.navbar-brand { font-weight: 700; font-size: 1.05rem; color: var(--fg); text-decoration: none; display:flex; align-items:center; gap:8px; }
+.navbar-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; padding: 6px 12px; border-radius: 6px; }
+.navbar-links a.active { color: #fff; background: rgba(255,255,255,0.08); }
+.navbar-user { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+.navbar-user .user-name { color: var(--muted); }
+.btn-logout { background: none; border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.btn-logout:hover { border-color: var(--muted); color: var(--fg); }
+
+.content { max-width: 1200px; margin: 0 auto; padding: 24px 20px 40px; }
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex; gap: 6px; align-items: center; font-size: 0.8rem; margin-bottom: 20px; color: var(--muted);
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { color: var(--border); }
+.breadcrumb .current { color: var(--fg); }
+
+/* Header card */
+.page-header {
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  border-radius: var(--radius); padding: 32px 36px; margin-bottom: 28px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.page-header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+.page-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 4px; }
+.btn-outline {
+  border: 1.5px solid rgba(255,255,255,0.5); color: #fff; background: transparent;
+  padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  backdrop-filter: blur(4px); transition: background 0.2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+/* Localidades grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.loc-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; transition: transform 0.2s, box-shadow 0.2s;
+}
+.loc-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+.loc-card.agotado { opacity: 0.5; border-color: rgba(229,83,75,0.3); }
+.loc-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+.badge {
+  display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-bottom: 16px;
+}
+.badge.available { background: rgba(63,185,80,0.12); color: var(--success); border: 1px solid rgba(63,185,80,0.3); }
+.badge.soldout { background: rgba(229,83,75,0.12); color: var(--danger); border: 1px solid rgba(229,83,75,0.3); }
+.price { font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
+.price-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 18px; }
+.btn-buy {
+  display: block; width: 100%; padding: 10px; background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  color: #fff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; text-align: center; text-decoration: none; transition: filter 0.15s;
+}
+.btn-buy:hover { filter: brightness(1.12); }
+.btn-buy:disabled { background: var(--surface2); color: var(--muted); cursor: not-allowed; filter: none; }
+
+.wf-note { text-align: center; margin-top: 32px; }
+.wf-badge { display: inline-block; padding: 4px 10px; border: 1px dashed var(--border); border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+
+/* Info strip */
+.info-strip {
+  display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.82rem; color: var(--muted); margin-bottom: 28px;
+  padding: 14px 18px; background: var(--surface); border-radius: 8px; border: 1px solid var(--border);
+}
+.info-strip span { color: var(--fg); font-weight: 500; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="partidos.html"><span>&#9917;</span> TicketPremium</a>
+  <div class="navbar-links">
+    <a href="partidos.html">Partidos</a>
+  </div>
+  <div class="navbar-user">
+    <span class="user-name">admin</span>
+    <button class="btn-logout" onclick="location.href='login.html'">Cerrar sesión</button>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="breadcrumb">
+    <a href="partidos.html">Partidos</a>
+    <span class="sep">/</span>
+    <span class="current">Barcelona SC vs Emelec</span>
+  </div>
+
+  <div class="page-header">
+    <div>
+      <h1>Localidades disponibles</h1>
+      <p>Barcelona SC vs Emelec — 25/05/2026 19:00 — Estadio Monumental</p>
+    </div>
+    <a href="resumen-ventas.html" class="btn-outline">Ver resumen de ventas →</a>
+  </div>
+
+  <!-- [WF] Loading: spinner "Cargando localidades..."
+       [WF] Error: alert rojo
+       [WF] Empty: "No hay localidades disponibles" -->
+
+  <div class="info-strip">
+    <div>Partido <span>#1001</span></div>
+    <div>Fecha <span>25/05/2026 19:00</span></div>
+    <div>Estadio <span>Monumental</span></div>
+    <div>Localidades <span>5</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="loc-card">
+      <div class="loc-name">General Norte</div>
+      <span class="badge available">1,250 disponibles</span>
+      <div class="price">$15.00</div>
+      <div class="price-sub">por boleto</div>
+      <a href="comprar.html" class="btn-buy">Comprar →</a>
+    </div>
+
+    <div class="loc-card">
+      <div class="loc-name">General Sur</div>
+      <span class="badge available">980 disponibles</span>
+      <div class="price">$15.00</div>
+      <div class="price-sub">por boleto</div>
+      <a href="comprar.html" class="btn-buy">Comprar →</a>
+    </div>
+
+    <div class="loc-card">
+      <div class="loc-name">Preferencia</div>
+      <span class="badge available">450 disponibles</span>
+      <div class="price">$25.00</div>
+      <div class="price-sub">por boleto</div>
+      <a href="comprar.html" class="btn-buy">Comprar →</a>
+    </div>
+
+    <div class="loc-card">
+      <div class="loc-name">Tribuna</div>
+      <span class="badge available">120 disponibles</span>
+      <div class="price">$45.00</div>
+      <div class="price-sub">por boleto</div>
+      <a href="comprar.html" class="btn-buy">Comprar →</a>
+    </div>
+
+    <div class="loc-card agotado">
+      <div class="loc-name">Palco VIP</div>
+      <span class="badge soldout">Agotado</span>
+      <div class="price">$80.00</div>
+      <div class="price-sub">por boleto</div>
+      <button class="btn-buy" disabled>Agotado</button>
+    </div>
+  </div>
+
+  <div class="wf-note">
+    <span class="wf-badge">Wireframe — Localidades</span><br>
+    <span style="color:var(--muted);font-size:0.72rem;">Ruta: /partido/{id}/localidades · Grid: 4 cols (xl) / 2 cols (default)</span>
+  </div>
+</main>
+</body>
+</html>

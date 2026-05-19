@@ -1,0 +1,120 @@
+@page "/resumen"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<PageTitle>Resumen de Ventas - TicketPremium</PageTitle>
+
+<h2 class="mb-4">
+    <i class="bi bi-bar-chart-fill"></i> Resumen de ventas por partido
+</h2>
+
+@if (isLoading)
+{
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2 text-muted">Cargando información...</p>
+    </div>
+}
+else if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (resumenes.Count == 0)
+{
+    <div class="alert alert-info">No hay información de ventas disponible.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var (partido, resumen) in resumenes)
+        {
+            var totalVendidos = resumen.Detalles.Sum(d => d.Vendidos);
+            var totalRecaudado = resumen.Detalles.Sum(d => d.TotalRecaudado);
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">@partido.EquipoLocal vs @partido.EquipoVisita</h5>
+                        <small>@partido.Fecha.ToString("dd/MM/yyyy HH:mm") - @partido.Lugar</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-around text-center mb-3">
+                            <div>
+                                <div class="fs-4 fw-bold text-primary">@totalVendidos</div>
+                                <small class="text-muted">Vendidos</small>
+                            </div>
+                            <div>
+                                <div class="fs-4 fw-bold text-success">$@totalRecaudado.ToString("N0")</div>
+                                <small class="text-muted">Recaudado</small>
+                            </div>
+                        </div>
+                        <a href="/resumen-ventas/@partido.Codigo" class="btn btn-outline-primary w-100 btn-sm">
+                            <i class="bi bi-eye"></i> Ver detalle
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="mt-4">
+    <a href="/partidos" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Volver a partidos
+    </a>
+</div>
+
+@code {
+    [Inject] private TicketService TicketService { get; set; } = default!;
+    [Inject] private AuthState AuthState { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+
+    private List<(PartidoDTO Partido, ResumenVentaDTO Resumen)> resumenes = new();
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override void OnInitialized()
+    {
+        if (!AuthState.IsAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            var partidos = await TicketService.ObtenerPartidosDisponiblesAsync();
+            resumenes.Clear();
+
+            foreach (var partido in partidos)
+            {
+                try
+                {
+                    var resumen = await TicketService.ObtenerResumenVentasAsync(partido.Codigo);
+                    resumenes.Add((partido, resumen));
+                }
+                catch
+                {
+                    // Skip matches that fail to load summary
+                }
+            }
+
+            resumenes = resumenes.OrderByDescending(r => r.Partido.Fecha).ToList();
+        }
+        catch (Exception)
+        {
+            errorMessage = "No se pudo cargar la información de ventas. Verifique la conexión.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

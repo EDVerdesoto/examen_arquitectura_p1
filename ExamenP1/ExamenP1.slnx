@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CLIWEB/CLIWEB.csproj" Id="69a8f412-f48b-4b1c-ae58-48e8ed5682a1" />
+  <Project Path="FederacionDeFutbol/FederacionDeFutbol.csproj" Id="37edca1b-2f52-4e41-8fcb-41372640cbf2" />
+  <Project Path="TicketPremium/TicketPremium.csproj" Id="5d6d210b-fa12-497c-8f73-e728950f3854" />
+</Solution>
