@@ -1,6 +1,9 @@
 <Solution>
   <Project Path="CLICON/CLICON.csproj" Id="9ea1d691-f6f2-46e1-ab08-ebc41514ce35" />
-  <Project Path="CLIMOV/CLIMOV.csproj" Id="06480092-9371-448e-b805-e0c0fbb1ef92" />
+  <Project Path="CLIESC/CLIESC.csproj" Id="54ab795b-2f8a-4079-812a-75d4e6bd28b6" />
+  <Project Path="CLIMOV/CLIMOV.csproj" Id="06480092-9371-448e-b805-e0c0fbb1ef92">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="CLIWEB/CLIWEB.csproj" Id="69a8f412-f48b-4b1c-ae58-48e8ed5682a1" />
   <Project Path="FederacionDeFutbol/FederacionDeFutbol.csproj" Id="37edca1b-2f52-4e41-8fcb-41372640cbf2" />
   <Project Path="TicketPremium/TicketPremium.csproj" Id="5d6d210b-fa12-497c-8f73-e728950f3854" />
