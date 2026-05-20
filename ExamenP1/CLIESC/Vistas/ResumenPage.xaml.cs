@@ -88,7 +88,20 @@ public partial class ResumenPage : ContentPage
             WidthRequest = 380
         };
 
-        var stack = new VerticalStackLayout { Spacing = 8, Padding = new Thickness(16) };
+        var grid = new Grid
+        {
+            RowDefinitions =
+            {
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Star),
+                new RowDefinition(GridLength.Auto)
+            },
+            RowSpacing = 8,
+            Padding = new Thickness(16)
+        };
 
         var teamsRow = new Grid
         {
@@ -129,7 +142,8 @@ public partial class ResumenPage : ContentPage
         teamsRow.Children.Add(localLabel);
         teamsRow.Children.Add(vsLabel);
         teamsRow.Children.Add(visitaLabel);
-        stack.Children.Add(teamsRow);
+        Grid.SetRow(teamsRow, 0);
+        grid.Children.Add(teamsRow);
 
         var divider = new BoxView
         {
@@ -137,7 +151,8 @@ public partial class ResumenPage : ContentPage
             Color = Color.FromArgb("#F0F0F0"),
             Margin = new Thickness(0, 4)
         };
-        stack.Children.Add(divider);
+        Grid.SetRow(divider, 1);
+        grid.Children.Add(divider);
 
         var infoGrid = new Grid
         {
@@ -167,7 +182,8 @@ public partial class ResumenPage : ContentPage
 
         infoGrid.Children.Add(dateLabel);
         infoGrid.Children.Add(lugarLabel);
-        stack.Children.Add(infoGrid);
+        Grid.SetRow(infoGrid, 2);
+        grid.Children.Add(infoGrid);
 
         var statsGrid = new Grid
         {
@@ -225,21 +241,24 @@ public partial class ResumenPage : ContentPage
 
         statsGrid.Children.Add(vendidosStack);
         statsGrid.Children.Add(recaudadoStack);
-        stack.Children.Add(statsGrid);
+        Grid.SetRow(statsGrid, 3);
+        grid.Children.Add(statsGrid);
 
         var button = new Button
         {
             Text = "Ver detalle",
             Style = (Style)Application.Current!.Resources["CardActionButton"],
-            Margin = new Thickness(0, 4, 0, 0)
+            Margin = new Thickness(0, 4, 0, 0),
+            VerticalOptions = LayoutOptions.End
         };
         button.Clicked += async (s, e) =>
         {
             await Shell.Current.GoToAsync($"ResumenVentasPage?CodigoPartido={partido.Codigo}");
         };
-        stack.Children.Add(button);
+        Grid.SetRow(button, 5);
+        grid.Children.Add(button);
 
-        card.Content = stack;
+        card.Content = grid;
         return card;
     }
 

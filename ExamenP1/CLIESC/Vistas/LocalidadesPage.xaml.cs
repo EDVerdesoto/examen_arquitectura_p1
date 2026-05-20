@@ -101,7 +101,20 @@ public partial class LocalidadesPage : ContentPage
         if (loc.Disponibilidad == 0)
             card.Opacity = 0.7;
 
-        var stack = new VerticalStackLayout { Spacing = 8, Padding = new Thickness(16) };
+        var grid = new Grid
+        {
+            RowDefinitions =
+            {
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Star),
+                new RowDefinition(GridLength.Auto)
+            },
+            RowSpacing = 8,
+            Padding = new Thickness(16)
+        };
 
         var nameLabel = new Label
         {
@@ -110,7 +123,8 @@ public partial class LocalidadesPage : ContentPage
             FontSize = 15,
             TextColor = (Color)Application.Current!.Resources["TextDark"]
         };
-        stack.Children.Add(nameLabel);
+        Grid.SetRow(nameLabel, 0);
+        grid.Children.Add(nameLabel);
 
         var badge = new Frame
         {
@@ -142,21 +156,24 @@ public partial class LocalidadesPage : ContentPage
         }
 
         badge.Content = badgeLabel;
-        stack.Children.Add(badge);
+        Grid.SetRow(badge, 1);
+        grid.Children.Add(badge);
 
         var priceLabel = new Label
         {
             Text = $"${loc.Precio:N2}",
             Style = (Style)Application.Current!.Resources["PriceLabel"]
         };
-        stack.Children.Add(priceLabel);
+        Grid.SetRow(priceLabel, 2);
+        grid.Children.Add(priceLabel);
 
         var subLabel = new Label
         {
             Text = "por boleto",
             Style = (Style)Application.Current!.Resources["MutedLabel"]
         };
-        stack.Children.Add(subLabel);
+        Grid.SetRow(subLabel, 3);
+        grid.Children.Add(subLabel);
 
         if (loc.Disponibilidad > 0)
         {
@@ -164,13 +181,15 @@ public partial class LocalidadesPage : ContentPage
             {
                 Text = "Comprar",
                 Style = (Style)Application.Current!.Resources["CardActionButton"],
-                Margin = new Thickness(0, 4, 0, 0)
+                Margin = new Thickness(0, 4, 0, 0),
+                VerticalOptions = LayoutOptions.End
             };
             button.Clicked += async (s, e) =>
             {
                 await Shell.Current.GoToAsync($"ComprarPage?CodigoPartido={CodigoPartido}&CodigoLocalidad={Uri.EscapeDataString(loc.CodigoLocalidad)}");
             };
-            stack.Children.Add(button);
+            Grid.SetRow(button, 5);
+            grid.Children.Add(button);
         }
         else
         {
@@ -185,12 +204,14 @@ public partial class LocalidadesPage : ContentPage
                 Padding = new Thickness(28, 10),
                 IsEnabled = false,
                 HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 4, 0, 0)
+                Margin = new Thickness(0, 4, 0, 0),
+                VerticalOptions = LayoutOptions.End
             };
-            stack.Children.Add(button);
+            Grid.SetRow(button, 5);
+            grid.Children.Add(button);
         }
 
-        card.Content = stack;
+        card.Content = grid;
         return card;
     }
 

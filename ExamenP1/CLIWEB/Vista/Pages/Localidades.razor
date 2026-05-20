@@ -52,7 +52,7 @@ else
         @foreach (var loc in localidades)
         {
             <div class="card h-100 shadow-sm localidad-card @(loc.Disponibilidad == 0 ? "border-danger opacity-75" : "")">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h4 class="team-name mb-2">@loc.CodigoLocalidad</h4>
 
                     <div class="mb-3">
@@ -69,13 +69,13 @@ else
                     @if (loc.Disponibilidad > 0)
                     {
                         <a href="/comprar/@CodigoPartido/@Uri.EscapeDataString(loc.CodigoLocalidad)"
-                           class="btn-match-action">
+                           class="btn-match-action mt-auto">
                             <i class="bi bi-cart3"></i> Comprar
                         </a>
                     }
                     else
                     {
-                        <button class="btn btn-secondary w-100" disabled>
+                        <button class="btn btn-secondary w-100 mt-auto" disabled>
                             <i class="bi bi-x-circle"></i> Agotado
                         </button>
                     }
