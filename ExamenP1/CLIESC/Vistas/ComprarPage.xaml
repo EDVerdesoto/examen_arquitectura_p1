@@ -82,11 +82,11 @@
             <Grid x:Name="ContentGrid"
                   IsVisible="False"
                   ColumnDefinitions="1*,1*"
-                  RowDefinitions="*"
+                   RowDefinitions="Auto"
                   ColumnSpacing="16">
 
                 <!-- Left Column: Form or Success -->
-                <VerticalStackLayout Grid.Column="0">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Start">
 
                     <!-- Purchase Form -->
                     <Frame x:Name="CompraFormCard"
