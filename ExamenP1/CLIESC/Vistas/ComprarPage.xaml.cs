@@ -196,6 +196,7 @@ public partial class ComprarPage : ContentPage
     {
         CompraFormCard.IsVisible = false;
         SuccessCard.IsVisible = true;
+        SideImage.Source = "monster_moreira.jpg";
 
         SuccessMessage.Text = response.Mensaje ?? "Compra realizada exitosamente.";
         FacturaIdLabel.Text = response.FacturaId.ToString();
@@ -216,12 +217,18 @@ public partial class ComprarPage : ContentPage
     {
         _compraExitosa = null;
         _isLoaded = false;
+        SideImage.Source = "estadio.jpg";
         CantidadEntry.Text = "1";
         PrecioDesglose.IsVisible = false;
         await LoadLocalidad();
     }
 
     private async void OnBackToLocalidadesClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("..");
     }

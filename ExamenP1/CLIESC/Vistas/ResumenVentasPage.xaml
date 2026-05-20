@@ -2,16 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CLIESC.Vistas.ResumenVentasPage"
-             Title="Detalle ventas">
+             Title="Detalle ventas"
+             BackgroundImageSource="fondo.jpg">
 
     <Shell.TitleView>
-        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-            <Label Text="TicketPremium"
+        <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+            <Button Text="Volver"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource White}"
+                    FontSize="12"
+                    Padding="8,4"
+                    BorderWidth="1"
+                    BorderColor="rgba(255,255,255,0.3)"
+                    CornerRadius="6"
+                    Clicked="OnBackClicked"
+                    VerticalOptions="Center" />
+            <Label Grid.Column="1"
+                   Text="TicketPremium"
                    TextColor="{StaticResource White}"
                    FontFamily="OpenSansSemibold"
                    FontSize="16"
                    VerticalOptions="Center" />
-            <Label Grid.Column="1"
+            <Label Grid.Column="2"
                    Text="Detalle de ventas"
                    TextColor="#CCFFFFFF"
                    FontSize="13"
@@ -21,21 +33,29 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="0,8,0,20"
-                             MaximumWidthRequest="1000"
+                             MaximumWidthRequest="1200"
                              HorizontalOptions="Center">
 
             <!-- Header Card -->
             <Frame x:Name="HeaderCard"
                    Style="{StaticResource HeaderCard}">
-                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="16">
-                    <VerticalStackLayout Spacing="4">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="rgba(255,255,255,0.3)"
+                            StrokeThickness="2"
+                            WidthRequest="96" HeightRequest="96"
+                            VerticalOptions="Center">
+                        <Image Source="monsterplata.png"
+                               Aspect="AspectFill" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
                         <Label Text="Resumen de ventas"
                                Style="{StaticResource PageTitle}" />
                         <Label x:Name="HeaderSubtitle"
                                TextColor="#CCFFFFFF"
                                FontSize="12" />
                     </VerticalStackLayout>
-                    <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                    <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
                         <Button Text="Localidades"
                                 Style="{StaticResource OutlineButton}"
                                 TextColor="{StaticResource White}"
@@ -149,7 +169,7 @@
                                Grid.Column="2"
                                TextColor="{StaticResource Success}"
                                FontFamily="OpenSansSemibold"
-                               FontSize="16"
+                               FontSize="20"
                                HorizontalTextAlignment="End" />
                     </Grid>
                 </Grid>

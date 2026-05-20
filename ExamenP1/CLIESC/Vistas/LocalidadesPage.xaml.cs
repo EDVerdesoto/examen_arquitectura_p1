@@ -60,7 +60,7 @@ public partial class LocalidadesPage : ContentPage
 
             if (_partido != null)
             {
-                HeaderSubtitle.Text = $"{_partido.EquipoLocal} vs {_partido.EquipoVisita} — {_partido.Fecha:dd/MM/yyyy HH:mm} — {_partido.Lugar}";
+                HeaderSubtitle.Text = $"{_partido.EquipoLocal} vs {_partido.EquipoVisita}  —  {_partido.Fecha:dd/MM/yyyy HH:mm}  —  {_partido.Lugar}";
             }
 
             var localidades = await _ticketService.ObtenerLocalidadesPorPartidoAsync(CodigoPartido);
@@ -94,7 +94,7 @@ public partial class LocalidadesPage : ContentPage
         var card = new Frame
         {
             Style = (Style)Application.Current!.Resources["LocalidadCard"],
-            WidthRequest = 260,
+            WidthRequest = 290,
             Margin = new Thickness(6)
         };
 
@@ -202,5 +202,10 @@ public partial class LocalidadesPage : ContentPage
     private async void OnResumenVentasClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync($"ResumenVentasPage?CodigoPartido={CodigoPartido}");
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
     }
 }

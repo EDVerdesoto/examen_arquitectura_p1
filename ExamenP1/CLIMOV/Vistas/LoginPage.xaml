@@ -9,9 +9,9 @@
         <VerticalStackLayout>
 
             <!-- Stadium Image -->
-            <Image Source="estadio.jpg"
+            <Image Source="monsterlogin.jpg"
                    Aspect="AspectFill"
-                   HeightRequest="280" />
+                   HeightRequest="400" />
 
             <!-- Login Card -->
             <Frame Margin="20,-30,20,20"

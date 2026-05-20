@@ -2,16 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CLIESC.Vistas.ComprarPage"
-             Title="Comprar">
+             Title="Comprar"
+             BackgroundImageSource="fondo.jpg">
 
     <Shell.TitleView>
-        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-            <Label Text="TicketPremium"
+        <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+            <Button Text="Volver"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource White}"
+                    FontSize="12"
+                    Padding="8,4"
+                    BorderWidth="1"
+                    BorderColor="rgba(255,255,255,0.3)"
+                    CornerRadius="6"
+                    Clicked="OnBackClicked"
+                    VerticalOptions="Center" />
+            <Label Grid.Column="1"
+                   Text="TicketPremium"
                    TextColor="{StaticResource White}"
                    FontFamily="OpenSansSemibold"
                    FontSize="16"
                    VerticalOptions="Center" />
-            <Label Grid.Column="1"
+            <Label Grid.Column="2"
                    Text="Comprar boletos"
                    TextColor="#CCFFFFFF"
                    FontSize="13"
@@ -21,7 +33,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="0,8,0,20"
-                             MaximumWidthRequest="1200"
+                             MaximumWidthRequest="1600"
                              HorizontalOptions="Center">
 
             <!-- Header Card -->
@@ -69,7 +81,8 @@
             <!-- Main Content Grid (Form + Image) -->
             <Grid x:Name="ContentGrid"
                   IsVisible="False"
-                  ColumnDefinitions="3*,2*"
+                  ColumnDefinitions="1*,1*"
+                  RowDefinitions="*"
                   ColumnSpacing="16">
 
                 <!-- Left Column: Form or Success -->
@@ -78,14 +91,17 @@
                     <!-- Purchase Form -->
                     <Frame x:Name="CompraFormCard"
                            IsVisible="False"
-                           Style="{StaticResource MatchCard}"
-                           Padding="20">
+                           CornerRadius="16"
+                           Padding="20"
+                           HasShadow="True"
+                           BorderColor="Transparent"
+                           BackgroundColor="{StaticResource White}">
                         <VerticalStackLayout Spacing="16">
 
                             <Button x:Name="BackButton"
                                     Text="Volver a localidades"
                                     BackgroundColor="Transparent"
-                                    TextColor="{StaticResource Primary}"
+                                    TextColor="#1a759f"
                                     HorizontalOptions="Start"
                                     Padding="0"
                                     FontSize="13"
@@ -125,12 +141,19 @@
                                        FontFamily="OpenSansSemibold"
                                        FontSize="14"
                                        TextColor="{StaticResource TextDark}" />
-                                <Entry x:Name="CantidadEntry"
-                                       Placeholder="1"
-                                       Keyboard="Numeric"
-                                       ReturnType="Done"
-                                       Text="1"
-                                       TextChanged="OnCantidadChanged" />
+                                <Border Stroke="{StaticResource Gray200}"
+                                        StrokeShape="RoundRectangle 6"
+                                        StrokeThickness="1"
+                                        Padding="12,4"
+                                        BackgroundColor="{StaticResource White}">
+                                    <Entry x:Name="CantidadEntry"
+                                           Placeholder="1"
+                                           Keyboard="Numeric"
+                                           ReturnType="Done"
+                                           Text="1"
+                                           TextChanged="OnCantidadChanged"
+                                           BackgroundColor="Transparent" />
+                                </Border>
                                 <Label x:Name="MaxLabel"
                                        Style="{StaticResource MutedLabel}"
                                        FontSize="11" />
@@ -170,12 +193,18 @@
                     <!-- Success -->
                     <Frame x:Name="SuccessCard"
                            IsVisible="False"
-                           Style="{StaticResource MatchCard}"
+                           CornerRadius="16"
+                           Padding="20"
+                           HasShadow="True"
                            BorderColor="{StaticResource Success}"
-                           Padding="20">
+                           BackgroundColor="{StaticResource White}">
                         <VerticalStackLayout Spacing="16">
-                            <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
-                                <Label Text="Compra exitosa"
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="O"
+                               FontSize="48"
+                               TextColor="{StaticResource Success}"
+                               HorizontalTextAlignment="Center" />
+                        <Label Text="Compra exitosa"
                                        FontSize="22"
                                        FontFamily="OpenSansSemibold"
                                        TextColor="{StaticResource Success}"
@@ -232,15 +261,18 @@
                 </VerticalStackLayout>
 
                 <!-- Right Column: Stadium Image -->
-                <Frame Grid.Column="1"
-                       CornerRadius="12"
-                       Padding="0"
-                       HasShadow="True"
-                       BorderColor="Transparent"
-                       IsClippedToBounds="True">
-                    <Image Source="estadio.jpg"
-                           Aspect="AspectFill" />
-                </Frame>
+                <Border Grid.Column="1"
+                       StrokeShape="RoundRectangle 16"
+                       Stroke="Transparent"
+                       StrokeThickness="0"
+                       VerticalOptions="Fill"
+                       HorizontalOptions="Fill">
+                    <Image x:Name="SideImage"
+                           Source="estadio.jpg"
+                           Aspect="AspectFill"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill" />
+                </Border>
 
             </Grid>
 

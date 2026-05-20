@@ -69,7 +69,7 @@ public partial class PartidosPage : ContentPage
         var card = new Frame
         {
             Style = (Style)Application.Current!.Resources["MatchCard"],
-            WidthRequest = 330
+            WidthRequest = 380
         };
 
         var stack = new VerticalStackLayout { Spacing = 8, Padding = new Thickness(16) };

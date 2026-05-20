@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CLIESC.Vistas.LoginPage"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="{StaticResource White}">
+             BackgroundImageSource="fondo.jpg">
 
     <Grid ColumnDefinitions="1*,1*">
 
         <!-- Left: Stadium Image -->
-        <Image Source="estadio.jpg"
+        <Image Source="monsterlogin.jpg"
                Aspect="AspectFill"
                Grid.Column="0" />
 
@@ -17,7 +17,7 @@
             <VerticalStackLayout VerticalOptions="Center"
                                  Padding="60,40"
                                  Spacing="0"
-                                 MaximumWidthRequest="440">
+                                 MaximumWidthRequest="480">
 
                 <Frame Padding="32,28"
                        CornerRadius="16"
@@ -52,11 +52,19 @@
                             <Label Text="Usuario"
                                    FontFamily="OpenSansSemibold"
                                    FontSize="14"
-                                   TextColor="{StaticResource TextDark}" />
-                            <Entry x:Name="UsernameEntry"
-                                   Placeholder="Nombre de usuario"
-                                   Keyboard="Default"
-                                   ReturnType="Next" />
+                                   TextColor="{StaticResource TextDark}"
+                                   Margin="0,0,0,4" />
+                            <Border Stroke="{StaticResource Gray200}"
+                                    StrokeShape="RoundRectangle 6"
+                                    StrokeThickness="1"
+                                    Padding="12,4"
+                                    BackgroundColor="{StaticResource White}">
+                                <Entry x:Name="UsernameEntry"
+                                       Placeholder="Nombre de usuario"
+                                       Keyboard="Default"
+                                       ReturnType="Next"
+                                       BackgroundColor="Transparent" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <!-- Clave -->
@@ -64,11 +72,19 @@
                             <Label Text="Clave"
                                    FontFamily="OpenSansSemibold"
                                    FontSize="14"
-                                   TextColor="{StaticResource TextDark}" />
-                            <Entry x:Name="PasswordEntry"
-                                   Placeholder="Contrasena"
-                                   IsPassword="True"
-                                   ReturnType="Done" />
+                                   TextColor="{StaticResource TextDark}"
+                                   Margin="0,0,0,4" />
+                            <Border Stroke="{StaticResource Gray200}"
+                                    StrokeShape="RoundRectangle 6"
+                                    StrokeThickness="1"
+                                    Padding="12,4"
+                                    BackgroundColor="{StaticResource White}">
+                                <Entry x:Name="PasswordEntry"
+                                       Placeholder="Contrasena"
+                                       IsPassword="True"
+                                       ReturnType="Done"
+                                       BackgroundColor="Transparent" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <!-- Ingresar Button -->

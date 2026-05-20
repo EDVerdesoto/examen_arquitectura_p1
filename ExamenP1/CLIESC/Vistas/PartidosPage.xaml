@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CLIESC.Vistas.PartidosPage"
-             Title="TicketPremium">
+             Title="TicketPremium"
+             BackgroundImageSource="fondo.jpg">
 
     <Shell.TitleView>
         <Grid ColumnDefinitions="*,Auto" Padding="0,0,8,0">
@@ -25,20 +26,29 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="0,8,0,20"
-                             MaximumWidthRequest="1200"
+                             MaximumWidthRequest="1500"
                              HorizontalOptions="Center">
 
             <!-- Header Card -->
             <Frame Style="{StaticResource HeaderCard}">
-                <Grid ColumnDefinitions="*,Auto">
-                    <VerticalStackLayout Spacing="6">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                    <Border StrokeShape="RoundRectangle 12"
+                            Stroke="rgba(255,255,255,0.3)"
+                            StrokeThickness="2"
+                            BackgroundColor="White"
+                            WidthRequest="96" HeightRequest="96"
+                            VerticalOptions="Center">
+                        <Image Source="monsterpartidos.png"
+                               Aspect="AspectFit" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
                         <Label Text="Partidos disponibles"
                                Style="{StaticResource PageTitle}" />
                         <Label Text="Encuentra los mejores partidos y compra tus boletos"
                                TextColor="#CCFFFFFF"
                                FontSize="13" />
                     </VerticalStackLayout>
-                    <Button Grid.Column="1"
+                    <Button Grid.Column="2"
                             Text="Resumen de ventas"
                             Style="{StaticResource OutlineButton}"
                             TextColor="{StaticResource White}"

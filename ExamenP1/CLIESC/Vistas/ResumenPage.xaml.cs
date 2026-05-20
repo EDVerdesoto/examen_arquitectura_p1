@@ -85,7 +85,7 @@ public partial class ResumenPage : ContentPage
         var card = new Frame
         {
             Style = (Style)Application.Current!.Resources["MatchCard"],
-            WidthRequest = 330
+            WidthRequest = 380
         };
 
         var stack = new VerticalStackLayout { Spacing = 8, Padding = new Thickness(16) };
@@ -251,5 +251,10 @@ public partial class ResumenPage : ContentPage
     private async void OnVolverPartidosClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//PartidosPage");
+    }
+
+    private async void OnBackClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
     }
 }

@@ -103,10 +103,11 @@ h1:focus {
 }
 
 .header-card-img {
-    width: 64px;
-    height: 64px;
+    background: #fff;
+    width: 96px;
+    height: 96px;
     border-radius: 0.75rem;
-    object-fit: cover;
+    object-fit: contain;
     border: 2px solid rgba(255, 255, 255, 0.3);
     flex-shrink: 0;
 }
