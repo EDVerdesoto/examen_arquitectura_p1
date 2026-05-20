@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CLIESC.Vistas.ResumenVentasPage"
+             Title="Detalle ventas">
+
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Label Text="TicketPremium"
+                   TextColor="{StaticResource White}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="16"
+                   VerticalOptions="Center" />
+            <Label Grid.Column="1"
+                   Text="Detalle de ventas"
+                   TextColor="#CCFFFFFF"
+                   FontSize="13"
+                   VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0,8,0,20"
+                             MaximumWidthRequest="1000"
+                             HorizontalOptions="Center">
+
+            <!-- Header Card -->
+            <Frame x:Name="HeaderCard"
+                   Style="{StaticResource HeaderCard}">
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="16">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Resumen de ventas"
+                               Style="{StaticResource PageTitle}" />
+                        <Label x:Name="HeaderSubtitle"
+                               TextColor="#CCFFFFFF"
+                               FontSize="12" />
+                    </VerticalStackLayout>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                        <Button Text="Localidades"
+                                Style="{StaticResource OutlineButton}"
+                                TextColor="{StaticResource White}"
+                                BorderColor="{StaticResource White}"
+                                Clicked="OnLocalidadesClicked" />
+                        <Button Text="Resumen"
+                                Style="{StaticResource OutlineButton}"
+                                TextColor="{StaticResource White}"
+                                BorderColor="{StaticResource White}"
+                                Clicked="OnResumenClicked" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Loading -->
+            <VerticalStackLayout x:Name="LoadingStack"
+                                 IsVisible="True"
+                                 HorizontalOptions="Center"
+                                 Padding="0,60,0,0"
+                                 Spacing="8">
+                <ActivityIndicator IsRunning="True"
+                                   WidthRequest="48"
+                                   HeightRequest="48"
+                                   Color="{StaticResource Primary}" />
+                <Label Text="Cargando resumen..."
+                       Style="{StaticResource MutedLabel}"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Error -->
+            <Frame x:Name="ErrorFrame"
+                   IsVisible="False"
+                   Margin="0,8"
+                   BackgroundColor="#FFE5E5"
+                   BorderColor="{StaticResource Danger}"
+                   CornerRadius="8"
+                   Padding="12,10"
+                   HasShadow="False">
+                <Label x:Name="ErrorLabel"
+                       TextColor="{StaticResource Danger}"
+                       FontSize="13" />
+            </Frame>
+
+            <!-- Empty -->
+            <Frame x:Name="EmptyFrame"
+                   IsVisible="False"
+                   Margin="0,8"
+                   BackgroundColor="#E8F4FD"
+                   BorderColor="{StaticResource Accent}"
+                   CornerRadius="8"
+                   Padding="16"
+                   HasShadow="False">
+                <Label Text="Aun no se han registrado ventas para este partido."
+                       TextColor="{StaticResource Primary}"
+                       FontSize="14"
+                       HorizontalTextAlignment="Center" />
+            </Frame>
+
+            <!-- Table -->
+            <Frame x:Name="TableFrame"
+                   IsVisible="False"
+                   Padding="0"
+                   CornerRadius="12"
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   BackgroundColor="{StaticResource White}">
+                <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+
+                    <!-- Header -->
+                    <Grid BackgroundColor="{StaticResource Primary}"
+                          Padding="20,14"
+                          ColumnDefinitions="2*,*,*">
+                        <Label Text="Localidad"
+                               TextColor="{StaticResource White}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="13" />
+                        <Label Grid.Column="1"
+                               Text="Boletos vendidos"
+                               TextColor="{StaticResource White}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="13"
+                               HorizontalTextAlignment="End" />
+                        <Label Grid.Column="2"
+                               Text="Total recaudado"
+                               TextColor="{StaticResource White}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="13"
+                               HorizontalTextAlignment="End" />
+                    </Grid>
+
+                    <!-- Rows -->
+                    <VerticalStackLayout x:Name="RowsStack" Grid.Row="1" />
+
+                    <!-- Footer -->
+                    <Grid x:Name="FooterGrid"
+                          Grid.Row="2"
+                          BackgroundColor="{StaticResource CardBackground}"
+                          Padding="20,14"
+                          ColumnDefinitions="2*,*,*">
+                        <Label Text="TOTALES"
+                               TextColor="{StaticResource TextDark}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="14" />
+                        <Label x:Name="FooterVendidos"
+                               Grid.Column="1"
+                               TextColor="{StaticResource TextDark}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="15"
+                               HorizontalTextAlignment="End" />
+                        <Label x:Name="FooterRecaudado"
+                               Grid.Column="2"
+                               TextColor="{StaticResource Success}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="16"
+                               HorizontalTextAlignment="End" />
+                    </Grid>
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

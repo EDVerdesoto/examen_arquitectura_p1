@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CLIESC.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vistas="clr-namespace:CLIESC.Vistas"
+    Title="TicketPremium"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="True">
+
+    <TabBar>
+        <ShellContent
+            x:Name="LoginShell"
+            Title="Login"
+            ContentTemplate="{DataTemplate vistas:LoginPage}"
+            Route="LoginPage" />
+
+        <ShellContent
+            x:Name="PartidosShell"
+            Title="TicketPremium"
+            ContentTemplate="{DataTemplate vistas:PartidosPage}"
+            Route="PartidosPage" />
+    </TabBar>
+
+</Shell>

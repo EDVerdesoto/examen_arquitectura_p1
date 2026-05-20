@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CLIESC.Vistas.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource White}">
+
+    <Grid ColumnDefinitions="1*,1*">
+
+        <!-- Left: Stadium Image -->
+        <Image Source="estadio.jpg"
+               Aspect="AspectFill"
+               Grid.Column="0" />
+
+        <!-- Right: Login Card -->
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Padding="60,40"
+                                 Spacing="0"
+                                 MaximumWidthRequest="440">
+
+                <Frame Padding="32,28"
+                       CornerRadius="16"
+                       BackgroundColor="{StaticResource White}"
+                       BorderColor="Transparent"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="16">
+
+                        <!-- Title -->
+                        <Label Text="TicketPremium"
+                               Style="{StaticResource LoginTitle}" />
+
+                        <Label Text="Iniciar sesion"
+                               Style="{StaticResource LoginSubtitle}"
+                               Margin="0,-6,0,8" />
+
+                        <!-- Error Message -->
+                        <Frame x:Name="ErrorFrame"
+                               IsVisible="False"
+                               BackgroundColor="#FFE5E5"
+                               BorderColor="{StaticResource Danger}"
+                               CornerRadius="8"
+                               Padding="12,10"
+                               HasShadow="False">
+                            <Label x:Name="ErrorLabel"
+                                   TextColor="{StaticResource Danger}"
+                                   FontSize="13" />
+                        </Frame>
+
+                        <!-- Usuario -->
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Usuario"
+                                   FontFamily="OpenSansSemibold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextDark}" />
+                            <Entry x:Name="UsernameEntry"
+                                   Placeholder="Nombre de usuario"
+                                   Keyboard="Default"
+                                   ReturnType="Next" />
+                        </VerticalStackLayout>
+
+                        <!-- Clave -->
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Clave"
+                                   FontFamily="OpenSansSemibold"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextDark}" />
+                            <Entry x:Name="PasswordEntry"
+                                   Placeholder="Contrasena"
+                                   IsPassword="True"
+                                   ReturnType="Done" />
+                        </VerticalStackLayout>
+
+                        <!-- Ingresar Button -->
+                        <Button x:Name="LoginButton"
+                                Text="Ingresar"
+                                Style="{StaticResource PrimaryButton}"
+                                Clicked="OnLoginClicked"
+                                Margin="0,8,0,0" />
+
+                        <!-- Loading -->
+                        <HorizontalStackLayout x:Name="LoadingStack"
+                                               IsVisible="False"
+                                               HorizontalOptions="Center"
+                                               Spacing="8">
+                            <ActivityIndicator IsRunning="True"
+                                               WidthRequest="20"
+                                               HeightRequest="20" />
+                            <Label Text="Ingresando..."
+                                   Style="{StaticResource MutedLabel}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
