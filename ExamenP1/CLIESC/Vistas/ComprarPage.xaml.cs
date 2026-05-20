@@ -100,7 +100,7 @@ public partial class ComprarPage : ContentPage
         }
         catch (Exception ex)
         {
-            ErrorLabel.Text = $"Error al cargar la informacion de la localidad: {ex.GetType().Name}: {ex.Message}";
+            ErrorLabel.Text = $"Error al cargar la información de la localidad: {ex.GetType().Name}: {ex.Message}";
             ErrorFrame.IsVisible = true;
         }
         finally

@@ -108,7 +108,7 @@
                    CornerRadius="8"
                    Padding="16"
                    HasShadow="False">
-                <Label Text="Aun no se han registrado ventas para este partido."
+                <Label Text="Aún no se han registrado ventas para este partido."
                        TextColor="{StaticResource Primary}"
                        FontSize="14"
                        HorizontalTextAlignment="Center" />

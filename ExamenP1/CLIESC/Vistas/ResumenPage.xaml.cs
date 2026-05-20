@@ -68,7 +68,7 @@ public partial class ResumenPage : ContentPage
         }
         catch (Exception ex)
         {
-            ErrorLabel.Text = $"No se pudo cargar la informacion de ventas: {ex.GetType().Name}: {ex.Message}";
+            ErrorLabel.Text = $"No se pudo cargar la información de ventas: {ex.GetType().Name}: {ex.Message}";
             ErrorFrame.IsVisible = true;
         }
         finally

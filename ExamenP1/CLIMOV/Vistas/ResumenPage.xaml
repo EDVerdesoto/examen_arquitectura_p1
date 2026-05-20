@@ -50,7 +50,7 @@
                                    WidthRequest="48"
                                    HeightRequest="48"
                                    Color="{StaticResource Primary}" />
-                <Label Text="Cargando informacion..."
+                <Label Text="Cargando información..."
                        Style="{StaticResource MutedLabel}"
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
@@ -78,7 +78,7 @@
                    CornerRadius="8"
                    Padding="16"
                    HasShadow="False">
-                <Label Text="No hay informacion de ventas disponible."
+                <Label Text="No hay información de ventas disponible."
                        TextColor="{StaticResource Primary}"
                        FontSize="14"
                        HorizontalTextAlignment="Center" />

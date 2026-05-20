@@ -59,7 +59,7 @@
                                    WidthRequest="48"
                                    HeightRequest="48"
                                    Color="{StaticResource Primary}" />
-                <Label Text="Cargando informacion..."
+                <Label Text="Cargando información..."
                        Style="{StaticResource MutedLabel}"
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
