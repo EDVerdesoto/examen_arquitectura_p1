@@ -1,6 +1,6 @@
 using System.Globalization;
-using CLIWEB.Components;
-using CLIWEB.Services;
+using CLIWEB.Vista;
+using CLIWEB.Controlador;
 using TicketPermiumServiceRef;
 
 // Set Spanish culture for validation messages

@@ -83,6 +83,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\202605192358222_CreacionInicial.cs" />
+    <Compile Include="Migrations\202605192358222_CreacionInicial.Designer.cs">
+      <DependentUpon>202605192358222_CreacionInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelo\Entidades\FacturaCabecera.cs" />
     <Compile Include="Modelo\Entidades\FacturaDetalle.cs" />
     <Compile Include="Modelo\Entidades\Usuario.cs" />
@@ -117,6 +122,11 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202605192358222_CreacionInicial.resx">
+      <DependentUpon>202605192358222_CreacionInicial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

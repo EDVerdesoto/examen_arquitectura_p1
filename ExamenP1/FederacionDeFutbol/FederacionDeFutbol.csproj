@@ -79,13 +79,9 @@
     <Compile Include="Controlador\DTOs\PartidoDTO.cs" />
     <Compile Include="Controlador\DTOs\RespuestaCompraDTO.cs" />
     <Compile Include="Controlador\Servicios\IPartidoService.cs" />
-    <Compile Include="Migrations\202605172044400_InitialCreate.cs" />
-    <Compile Include="Migrations\202605172044400_InitialCreate.Designer.cs">
-      <DependentUpon>202605172044400_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202605172045061_CreacionInicial.cs" />
-    <Compile Include="Migrations\202605172045061_CreacionInicial.Designer.cs">
-      <DependentUpon>202605172045061_CreacionInicial.cs</DependentUpon>
+    <Compile Include="Migrations\202605192219386_CreacionInicial.cs" />
+    <Compile Include="Migrations\202605192219386_CreacionInicial.Designer.cs">
+      <DependentUpon>202605192219386_CreacionInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelo\Configuraciones\LocalidadPartidoConfig.cs" />
@@ -111,11 +107,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202605172044400_InitialCreate.resx">
-      <DependentUpon>202605172044400_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202605172045061_CreacionInicial.resx">
-      <DependentUpon>202605172045061_CreacionInicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202605192219386_CreacionInicial.resx">
+      <DependentUpon>202605192219386_CreacionInicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

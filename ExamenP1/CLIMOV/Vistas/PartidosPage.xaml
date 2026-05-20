@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CLIMOV.Vistas.PartidosPage"
+             Title="TicketPremium">
+
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="*,Auto" Padding="0,0,8,0">
+            <Label Text="TicketPremium"
+                   TextColor="{StaticResource White}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="20"
+                   VerticalOptions="Center" />
+            <Button Grid.Column="1"
+                    Text="Cerrar sesion"
+                    Style="{StaticResource OutlineButton}"
+                    TextColor="{StaticResource White}"
+                    BorderColor="{StaticResource White}"
+                    FontSize="12"
+                    Padding="12,6"
+                    Clicked="OnLogoutClicked"
+                    VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0,8,0,20">
+
+            <!-- Header Card -->
+            <Frame Style="{StaticResource HeaderCard}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Partidos disponibles"
+                           Style="{StaticResource PageTitle}" />
+                    <Label Text="Encuentra los mejores partidos y compra tus boletos"
+                           TextColor="#CCFFFFFF"
+                           FontSize="14" />
+                    <Button Text="Resumen de ventas"
+                            Style="{StaticResource OutlineButton}"
+                            TextColor="{StaticResource White}"
+                            BorderColor="{StaticResource White}"
+                            HorizontalOptions="Start"
+                            Clicked="OnResumenClicked"
+                            Margin="0,4,0,0" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Loading -->
+            <VerticalStackLayout x:Name="LoadingStack"
+                                 IsVisible="True"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Padding="0,40,0,0"
+                                 Spacing="8">
+                <ActivityIndicator IsRunning="True"
+                                   WidthRequest="48"
+                                   HeightRequest="48"
+                                   Color="{StaticResource Primary}" />
+                <Label Text="Cargando partidos..."
+                       Style="{StaticResource MutedLabel}"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Error -->
+            <Frame x:Name="ErrorFrame"
+                   IsVisible="False"
+                   Margin="12,8"
+                   BackgroundColor="#FFE5E5"
+                   BorderColor="{StaticResource Danger}"
+                   CornerRadius="8"
+                   Padding="12,10"
+                   HasShadow="False">
+                <Label x:Name="ErrorLabel"
+                       TextColor="{StaticResource Danger}"
+                       FontSize="13" />
+            </Frame>
+
+            <!-- Empty -->
+            <Frame x:Name="EmptyFrame"
+                   IsVisible="False"
+                   Margin="12,8"
+                   BackgroundColor="#E8F4FD"
+                   BorderColor="{StaticResource Accent}"
+                   CornerRadius="8"
+                   Padding="16"
+                   HasShadow="False">
+                <Label Text="No hay partidos disponibles en este momento."
+                       TextColor="{StaticResource Primary}"
+                       FontSize="14"
+                       HorizontalTextAlignment="Center" />
+            </Frame>
+
+            <!-- Partidos List -->
+            <VerticalStackLayout x:Name="PartidosStack"
+                                 IsVisible="False" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

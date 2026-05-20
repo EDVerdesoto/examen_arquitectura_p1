@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CLIMOV.Vistas.ResumenPage"
+             Title="Resumen">
+
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Label Text="TicketPremium"
+                   TextColor="{StaticResource White}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="18"
+                   VerticalOptions="Center" />
+            <Label Grid.Column="1"
+                   Text="Resumen de ventas"
+                   TextColor="#CCFFFFFF"
+                   FontSize="14"
+                   VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0,8,0,20">
+
+            <!-- Header Card -->
+            <Frame Style="{StaticResource HeaderCard}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Resumen de ventas por partido"
+                           Style="{StaticResource PageTitle}" />
+                    <Label Text="Consulta el desempeno de ventas de cada encuentro"
+                           TextColor="#CCFFFFFF"
+                           FontSize="14" />
+                    <Button Text="Volver a partidos"
+                            Style="{StaticResource OutlineButton}"
+                            TextColor="{StaticResource White}"
+                            BorderColor="{StaticResource White}"
+                            HorizontalOptions="Start"
+                            Clicked="OnVolverPartidosClicked"
+                            Margin="0,4,0,0" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Loading -->
+            <VerticalStackLayout x:Name="LoadingStack"
+                                 IsVisible="True"
+                                 HorizontalOptions="Center"
+                                 Padding="0,40,0,0"
+                                 Spacing="8">
+                <ActivityIndicator IsRunning="True"
+                                   WidthRequest="48"
+                                   HeightRequest="48"
+                                   Color="{StaticResource Primary}" />
+                <Label Text="Cargando informacion..."
+                       Style="{StaticResource MutedLabel}"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Error -->
+            <Frame x:Name="ErrorFrame"
+                   IsVisible="False"
+                   Margin="12,8"
+                   BackgroundColor="#FFE5E5"
+                   BorderColor="{StaticResource Danger}"
+                   CornerRadius="8"
+                   Padding="12,10"
+                   HasShadow="False">
+                <Label x:Name="ErrorLabel"
+                       TextColor="{StaticResource Danger}"
+                       FontSize="13" />
+            </Frame>
+
+            <!-- Empty -->
+            <Frame x:Name="EmptyFrame"
+                   IsVisible="False"
+                   Margin="12,8"
+                   BackgroundColor="#E8F4FD"
+                   BorderColor="{StaticResource Accent}"
+                   CornerRadius="8"
+                   Padding="16"
+                   HasShadow="False">
+                <Label Text="No hay informacion de ventas disponible."
+                       TextColor="{StaticResource Primary}"
+                       FontSize="14"
+                       HorizontalTextAlignment="Center" />
+            </Frame>
+
+            <!-- Resumen List -->
+            <VerticalStackLayout x:Name="ResumenStack"
+                                 IsVisible="False" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

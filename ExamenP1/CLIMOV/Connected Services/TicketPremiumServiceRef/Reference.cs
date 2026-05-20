@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TicketPermiumServiceRef
+namespace TicketPremiumServiceRef
 {
     using System.Runtime.Serialization;
     
@@ -413,14 +413,14 @@ namespace TicketPermiumServiceRef
     public partial class ResumenVentaDTO : object
     {
         
-        private TicketPermiumServiceRef.ResumenVentaDetalleDTO[] DetallesField;
+        private TicketPremiumServiceRef.ResumenVentaDetalleDTO[] DetallesField;
         
         private System.DateTime FechaField;
         
         private string PartidoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TicketPermiumServiceRef.ResumenVentaDetalleDTO[] Detalles
+        public TicketPremiumServiceRef.ResumenVentaDetalleDTO[] Detalles
         {
             get
             {
@@ -512,34 +512,34 @@ namespace TicketPermiumServiceRef
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TicketPermiumServiceRef.ITicketPremiumService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TicketPremiumServiceRef.ITicketPremiumService")]
     public interface ITicketPremiumService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketPremiumService/Login", ReplyAction="http://tempuri.org/ITicketPremiumService/LoginResponse")]
-        System.Threading.Tasks.Task<TicketPermiumServiceRef.LoginResponse> LoginAsync(string nombreUsuario, string clave);
+        System.Threading.Tasks.Task<TicketPremiumServiceRef.LoginResponse> LoginAsync(string nombreUsuario, string clave);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketPremiumService/ObtenerPartidosDisponibles", ReplyAction="http://tempuri.org/ITicketPremiumService/ObtenerPartidosDisponiblesResponse")]
-        System.Threading.Tasks.Task<TicketPermiumServiceRef.PartidoDTO[]> ObtenerPartidosDisponiblesAsync();
+        System.Threading.Tasks.Task<TicketPremiumServiceRef.PartidoDTO[]> ObtenerPartidosDisponiblesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketPremiumService/ObtenerLocalidadesPorPartido", ReplyAction="http://tempuri.org/ITicketPremiumService/ObtenerLocalidadesPorPartidoResponse")]
-        System.Threading.Tasks.Task<TicketPermiumServiceRef.LocalidadDTO[]> ObtenerLocalidadesPorPartidoAsync(int codigoPartido);
+        System.Threading.Tasks.Task<TicketPremiumServiceRef.LocalidadDTO[]> ObtenerLocalidadesPorPartidoAsync(int codigoPartido);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketPremiumService/ComprarBoletos", ReplyAction="http://tempuri.org/ITicketPremiumService/ComprarBoletosResponse")]
-        System.Threading.Tasks.Task<TicketPermiumServiceRef.CompraResponse> ComprarBoletosAsync(TicketPermiumServiceRef.CompraRequest request);
+        System.Threading.Tasks.Task<TicketPremiumServiceRef.CompraResponse> ComprarBoletosAsync(TicketPremiumServiceRef.CompraRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITicketPremiumService/ObtenerResumenVentas", ReplyAction="http://tempuri.org/ITicketPremiumService/ObtenerResumenVentasResponse")]
-        System.Threading.Tasks.Task<TicketPermiumServiceRef.ResumenVentaDTO> ObtenerResumenVentasAsync(int codigoPartido);
+        System.Threading.Tasks.Task<TicketPremiumServiceRef.ResumenVentaDTO> ObtenerResumenVentasAsync(int codigoPartido);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public interface ITicketPremiumServiceChannel : TicketPermiumServiceRef.ITicketPremiumService, System.ServiceModel.IClientChannel
+    public interface ITicketPremiumServiceChannel : TicketPremiumServiceRef.ITicketPremiumService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public partial class TicketPremiumServiceClient : System.ServiceModel.ClientBase<TicketPermiumServiceRef.ITicketPremiumService>, TicketPermiumServiceRef.ITicketPremiumService
+    public partial class TicketPremiumServiceClient : System.ServiceModel.ClientBase<TicketPremiumServiceRef.ITicketPremiumService>, TicketPremiumServiceRef.ITicketPremiumService
     {
         
         /// <summary>
@@ -582,27 +582,27 @@ namespace TicketPermiumServiceRef
         {
         }
         
-        public System.Threading.Tasks.Task<TicketPermiumServiceRef.LoginResponse> LoginAsync(string nombreUsuario, string clave)
+        public System.Threading.Tasks.Task<TicketPremiumServiceRef.LoginResponse> LoginAsync(string nombreUsuario, string clave)
         {
             return base.Channel.LoginAsync(nombreUsuario, clave);
         }
         
-        public System.Threading.Tasks.Task<TicketPermiumServiceRef.PartidoDTO[]> ObtenerPartidosDisponiblesAsync()
+        public System.Threading.Tasks.Task<TicketPremiumServiceRef.PartidoDTO[]> ObtenerPartidosDisponiblesAsync()
         {
             return base.Channel.ObtenerPartidosDisponiblesAsync();
         }
         
-        public System.Threading.Tasks.Task<TicketPermiumServiceRef.LocalidadDTO[]> ObtenerLocalidadesPorPartidoAsync(int codigoPartido)
+        public System.Threading.Tasks.Task<TicketPremiumServiceRef.LocalidadDTO[]> ObtenerLocalidadesPorPartidoAsync(int codigoPartido)
         {
             return base.Channel.ObtenerLocalidadesPorPartidoAsync(codigoPartido);
         }
         
-        public System.Threading.Tasks.Task<TicketPermiumServiceRef.CompraResponse> ComprarBoletosAsync(TicketPermiumServiceRef.CompraRequest request)
+        public System.Threading.Tasks.Task<TicketPremiumServiceRef.CompraResponse> ComprarBoletosAsync(TicketPremiumServiceRef.CompraRequest request)
         {
             return base.Channel.ComprarBoletosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<TicketPermiumServiceRef.ResumenVentaDTO> ObtenerResumenVentasAsync(int codigoPartido)
+        public System.Threading.Tasks.Task<TicketPremiumServiceRef.ResumenVentaDTO> ObtenerResumenVentasAsync(int codigoPartido)
         {
             return base.Channel.ObtenerResumenVentasAsync(codigoPartido);
         }

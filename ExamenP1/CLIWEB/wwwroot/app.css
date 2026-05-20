@@ -102,6 +102,15 @@ h1:focus {
     color: white;
 }
 
+.header-card-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+}
+
 .match-card {
     border: none;
     border-radius: 12px;
